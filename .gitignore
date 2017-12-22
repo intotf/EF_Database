@@ -1,2 +1,14 @@
 /EFDatabase/obj
 /EFDatabase/bin
+/WinForm/obj
+/WinForm/bin
+/Server/obj
+/Server/bin
+/RedisServer/obj
+/RedisServer/bin
+/MongoServer/bin
+/MongoServer/obj
+/Model/obj
+/Model/bin
+/Command/obj
+/Command/bin

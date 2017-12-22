@@ -15,15 +15,7 @@ namespace Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Message = "EF_DataBase 是一个连接各类DB 小实例，包含Web及WinForm 两种方式调用.对指定数据库的读取、添加、编辑、删除基本功能。";
             return View();
         }
     }

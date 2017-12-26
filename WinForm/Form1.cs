@@ -35,7 +35,7 @@ namespace WinForm
         /// <returns></returns>
         private async Task<List<TDemoTable>> GetList()
         {
-            using (var db = new SqlDb())
+            using (var db = new SqlDbTwo())
             {
                 var data = await db.TDemoTable.Where(item => true).ToListAsync();
                 return data;

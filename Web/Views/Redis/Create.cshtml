@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "添加";
+    var properties = typeof(TDemoTable).GetProperties();
+    var userList = ViewBag.UserList as IEnumerable<SelectListItem>;
+
+
+    Func<Type, string> GetModeTypeName = (Type type) =>
+    {
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+        {
+            type = type.GetGenericArguments().FirstOrDefault();
+            return type.Name + "?";
+        }
+        return type.Name;
+    };
+
+    Func<Type, string> getInputType = (type) =>
+    {
+        if (type.IsValueType && type != typeof(bool) && type != typeof(bool?) && type != typeof(DateTime) && type != typeof(DateTime?))
+        {
+            return "number";
+        }
+        return "text";
+    };
+
+    Func<Type, string> getDataType = (type) =>
+    {
+        if (type == typeof(DateTime) || type == typeof(DateTime?))
+        {
+            return "datetime";
+        }
+        if (type == typeof(bool) || type == typeof(bool?))
+        {
+            return "bool";
+        }
+        else if (type.IsValueType)
+        {
+            return "number";
+        }
+        else
+        {
+            return "string";
+        }
+    };
+}
+
+@section scripts{
+    <script>
+        function save() {
+            $.post('/@ViewContext.RouteData.Values["controller"]/@ViewContext.RouteData.Values["action"]', $(".form-horizontal").serialize(), function (data) {
+                if (data.state) {
+                    alert(data.value);
+                    window.location.href = document.referrer;
+                } else {
+                    alert("操作失败");
+                    window.location.href = document.referrer;
+                }
+            })
+        }
+    </script>
+}
+@model TDemoTable
+
+<h2>添加/编辑 @ViewContext.RouteData.Values["controller"] @Model.GetType().Name</h2>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="UserId" class="col-sm-2 control-label">
+            <span>选择订阅者</span>
+        </label>
+        <div class="col-sm-10">
+            @Html.DropDownList("UserId", userList, "选择用户", new { @class = "form-control" })
+        </div>
+    </div>
+
+    @foreach (var p in properties)
+    {
+        var proValue = p.GetValue(Model, null);
+        <div class="form-group">
+            <label for="@p.Name" class="col-sm-2 control-label">
+                <span>@p.Name</span>
+            </label>
+            <div class="col-sm-10">
+                @if (p.PropertyType == typeof(bool) || p.PropertyType == typeof(bool?))
+                {
+                    @Html.CheckBox(p.Name, proValue);
+                }
+                else
+                {
+                    <input data-type="@getDataType(p.PropertyType)" type="@getInputType(p.PropertyType)" name="@p.Name" class="form-control" placeholder="@GetModeTypeName(p.PropertyType)" value="@proValue">
+                }
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-success" onclick="save()"><i class="glyphicon glyphicon-floppy-disk"></i> 保存</button>
+        </div>
+    </div>
+</form>

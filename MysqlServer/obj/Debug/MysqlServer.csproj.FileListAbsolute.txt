@@ -1,0 +1,13 @@
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\MysqlServer.dll.config
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\MysqlServer.dll
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\MysqlServer.pdb
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\EntityFramework.dll
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\Model.dll
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\MySql.Data.Entity.EF6.dll
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\Model.pdb
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\EntityFramework.xml
+E:\学习资料\GitHub\EF_Database\MysqlServer\obj\Debug\MysqlServer.csprojResolveAssemblyReference.cache
+E:\学习资料\GitHub\EF_Database\MysqlServer\obj\Debug\MysqlServer.dll
+E:\学习资料\GitHub\EF_Database\MysqlServer\obj\Debug\MysqlServer.pdb
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\Newtonsoft.Json.dll
+E:\学习资料\GitHub\EF_Database\MysqlServer\bin\Debug\Newtonsoft.Json.xml

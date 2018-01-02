@@ -13,8 +13,18 @@ namespace Model
     /// </summary>
     [Table("T_DemoTable")]
     [Serializable]
-    public class TDemoTable : IAutoId
+    public class TDemoTable : IAutoId, IMongoLog, ISyncData
     {
+        /// <summary>
+        /// 获取新id
+        /// </summary>
+        /// <returns></returns>
+        public static int GetNewId()
+        {
+            var now = DateTime.Now;
+            return now.Millisecond + now.Second + now.Minute + now.Hour + now.Month + now.Year;
+        }
+
         /// <summary>
         /// 自增类型
         /// </summary>
@@ -81,5 +91,10 @@ namespace Model
         /// </summary>
         [Column("F_BoolNull")]
         public bool? F_BoolNull { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
     }
 }

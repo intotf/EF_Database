@@ -63,7 +63,7 @@ namespace SqlServer
         /// </summary>
         /// <typeparam name="TServer">服务类型</typeparam>
         /// <returns></returns>
-        public TServer Server<TServer>() where TServer : ISqlServer, new()
+        public TServer Server<TServer>() where TServer : ISqlServer<SqlDb>, new()
         {
             var server = Activator.CreateInstance<TServer>();
             server.SetContext(this);

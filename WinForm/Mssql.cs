@@ -12,18 +12,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Infrastructure.Utility;
+using Command;
 
 namespace WinForm
 {
-    public partial class Form1 : Form
+    public partial class Mssql : Form
     {
-        public Form1()
+        public Mssql()
         {
             InitializeComponent();
-            this.Load += Form1_Load;
+            this.Load += Mssql_Load;
         }
 
-        async void Form1_Load(object sender, EventArgs e)
+        async void Mssql_Load(object sender, EventArgs e)
         {
             await InitializeData();
         }
@@ -35,7 +36,7 @@ namespace WinForm
         /// <returns></returns>
         private async Task<List<TDemoTable>> GetList()
         {
-            using (var db = new SqlDbTwo())
+            using (var db = new SqlDb())
             {
                 var data = await db.TDemoTable.Where(item => true).ToListAsync();
                 return data;
@@ -74,17 +75,7 @@ namespace WinForm
         /// <param name="e"></param>
         private async void AddToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var model = new TDemoTable()
-            {
-                F_Guid = Guid.NewGuid().ToString(),
-                F_Bool = true,
-                F_DateTime = DateTime.Now,
-                F_Float = 0.01f,
-                Id = 99,
-                F_Int = 1,
-                F_IntNull = -1,
-                F_String = "String"
-            };
+            var model = Config.GetDemoModel();
             await Add(model);
             await InitializeData();
         }

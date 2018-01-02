@@ -12,30 +12,30 @@ namespace SqlServer
     /// <summary>
     /// 定义Sql存储服务
     /// </summary>
-    public interface ISqlServer
+    public interface ISqlServer<T> where T : DbContext
     {
         /// <summary>
         /// 设置上下文实例
         /// </summary>
         /// <param name="db"></param>
-        void SetContext(SqlDb db);
+        void SetContext(T db);
     }
 
     /// <summary>
     /// Sql存储服务基础类
     /// </summary>
-    public abstract class SqlServerBase : ISqlServer
+    public abstract class SqlServerBase<T> : ISqlServer<T> where T : DbContext
     {
         /// <summary>
         /// 获取数据库上下文
         /// </summary>
-        protected SqlDb Db { get; private set; }
+        protected T Db { get; private set; }
 
         /// <summary>
         /// 设置上下文实例
         /// </summary>
         /// <param name="db"></param>
-        void ISqlServer.SetContext(SqlDb db)
+        void ISqlServer<T>.SetContext(T db)
         {
             this.Db = db;
         }

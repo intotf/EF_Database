@@ -42,9 +42,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Infrastructure\bin\Debug\Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\net_packages\net_packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>..\..\net_packages\net_packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,16 +67,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Config.cs" />
+    <Compile Include="MongoDb.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MongoDb.Designer.cs">
+      <DependentUpon>MongoDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mssql.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mssql.Designer.cs">
+      <DependentUpon>Mssql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mysql.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mysql.Designer.cs">
+      <DependentUpon>Mysql.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Redis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redis.Designer.cs">
+      <DependentUpon>Redis.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MongoDb.resx">
+      <DependentUpon>MongoDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mssql.resx">
+      <DependentUpon>Mssql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mysql.resx">
+      <DependentUpon>Mysql.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -75,6 +121,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Redis.resx">
+      <DependentUpon>Redis.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,14 +139,37 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Command\Command.csproj">
+      <Project>{4738afa1-e4bc-4835-af32-b4338489b817}</Project>
+      <Name>Command</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{daf16140-f585-48fb-87b1-f527df0c5d98}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MongoServer\MongoServer.csproj">
+      <Project>{5f91a8a3-b15c-43ff-8f9b-7579a6fe435e}</Project>
+      <Name>MongoServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MysqlServer\MysqlServer.csproj">
+      <Project>{434e3a00-0f16-4ab1-89fe-27ce6c709333}</Project>
+      <Name>MysqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RedisClientLib\RedisClientLib.csproj">
+      <Project>{bfa01b84-cfaa-4277-a24d-71a9805fb883}</Project>
+      <Name>RedisClientLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RedisServer\RedisServer.csproj">
+      <Project>{457cc1c4-71ce-45ef-b4aa-9c825d14acd9}</Project>
+      <Name>RedisServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Server\SqlServer.csproj">
       <Project>{75ceb413-f08a-4eb8-848c-d58f2175327e}</Project>
       <Name>SqlServer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Mongodb.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

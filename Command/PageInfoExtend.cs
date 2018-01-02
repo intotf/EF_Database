@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Infrastructure.Page;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
 using System.Linq.Expressions;
+using System.Data.Entity;
+using System.Text;
 using System.Threading.Tasks;
-using Infrastructure.Page;
-namespace SqlServer
+using MongoDB.Driver;
+
+namespace Command
 {
+    /// <summary>
+    /// 分页扩展
+    /// </summary>
     public static class PageInfoExtend
     {
         /// <summary>
@@ -32,28 +38,27 @@ namespace SqlServer
         }
 
 
-        ///// <summary>
-        ///// 根据时间倒序排序分页
-        ///// </summary>
-        ///// <typeparam name="T">实体类型</typeparam>
-        ///// <param name="source">数据源</param>
-        ///// <param name="where">条件</param>
-        ///// <param name="pageIndex">分页索引</param>
-        ///// <param name="pageSize">分页大小</param>
-        ///// <returns></returns>
-        //public static PageInfo<T> ToPage<T>(this IMongoCollection<T> source, Expression<Func<T, bool>> where, int pageIndex, int pageSize) where T : class,IMongoLog
-        //{
-        //    int total = (int)source.Count(where);
+        /// <summary>
+        /// 根据时间倒序排序分页
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="source">数据源</param>
+        /// <param name="where">条件</param>
+        /// <param name="pageIndex">分页索引</param>
+        /// <param name="pageSize">分页大小</param>
+        /// <returns></returns>
+        public static async Task<PageInfo<T>> ToPageAsync<T>(this IMongoCollection<T> source, Expression<Func<T, bool>> where, int pageIndex, int pageSize) where T : class
+        {
+            int total = (int)source.Count(where);
 
-        //    var data = source
-        //       .Aggregate(new AggregateOptions { AllowDiskUse = true })
-        //       .Match(where)
-        //       .SortByDescending(item => item.CreateTime)
-        //       .Skip(pageIndex * pageSize)
-        //       .Limit(pageSize)
-        //       .ToList();
+            var data = await source
+               .Aggregate(new AggregateOptions { AllowDiskUse = true })
+               .Match(where)
+               .Skip(pageIndex * pageSize)
+               .Limit(pageSize)
+               .ToListAsync();
 
-        //    return new PageInfo<T>(total, data) { PageIndex = pageIndex, PageSize = pageSize };
-        //}
+            return new PageInfo<T>(total, data) { PageIndex = pageIndex, PageSize = pageSize };
+        }
     }
 }

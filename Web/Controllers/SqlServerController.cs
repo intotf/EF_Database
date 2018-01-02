@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Infrastructure;
+using Command;
 
 namespace Web.Controllers
 {
     public class SqlServerController : Controller
     {
         // GET: SqlServer
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? pageindex)
         {
+            var page = pageindex ?? 1;
+            var pageSize = 10;
+            var order = " Id desc";
             using (var db = new SqlDb())
             {
                 var where = Where.True<TDemoTable>();
@@ -25,7 +29,7 @@ namespace Web.Controllers
                 {
                     where = where.And(item => item.F_String.Contains(F_String.ToString()));
                 }
-                var data = await db.TDemoTable.Where(where).ToListAsync();
+                var data = await db.TDemoTable.Where(where).ToPageAsync(order, page, pageSize);
                 return View(data);
             }
         }
@@ -38,6 +42,7 @@ namespace Web.Controllers
             model.F_Float = 0.01f;
             model.F_Int = 0;
             model.F_BoolNull = true;
+            model.CreateTime = DateTime.Now;
             return View(model);
         }
 
@@ -49,6 +54,7 @@ namespace Web.Controllers
         public async Task<JsonResult> Create(TDemoTable model)
         {
             model.F_Guid = Guid.NewGuid().ToString();
+            model.CreateTime = DateTime.Now;
             using (var db = new SqlDb())
             {
                 db.TDemoTable.Add(model);

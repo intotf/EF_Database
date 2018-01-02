@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Command", "Command\Command.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{7328C93E-AC90-4E41-B181-DD885F12243B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MysqlServer", "MysqlServer\MysqlServer.csproj", "{434E3A00-0F16-4AB1-89FE-27CE6C709333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClientLib", "RedisClientLib\RedisClientLib.csproj", "{BFA01B84-CFAA-4277-A24D-71A9805FB883}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{7328C93E-AC90-4E41-B181-DD885F12243B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7328C93E-AC90-4E41-B181-DD885F12243B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7328C93E-AC90-4E41-B181-DD885F12243B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{434E3A00-0F16-4AB1-89FE-27CE6C709333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{434E3A00-0F16-4AB1-89FE-27CE6C709333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{434E3A00-0F16-4AB1-89FE-27CE6C709333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{434E3A00-0F16-4AB1-89FE-27CE6C709333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA01B84-CFAA-4277-A24D-71A9805FB883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA01B84-CFAA-4277-A24D-71A9805FB883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA01B84-CFAA-4277-A24D-71A9805FB883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA01B84-CFAA-4277-A24D-71A9805FB883}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

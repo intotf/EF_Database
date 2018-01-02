@@ -36,6 +36,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\net_packages\net_packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\net_packages\net_packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -46,8 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\DataAction.cs" />
+    <Compile Include="Enum\MongoTableType.cs" />
     <Compile Include="IAutoId.cs" />
+    <Compile Include="IMongoLog.cs" />
     <Compile Include="IStringId.cs" />
+    <Compile Include="ISubscribers.cs" />
+    <Compile Include="ISyncData.cs" />
+    <Compile Include="RedisSyncData.cs" />
+    <Compile Include="RedisSubscriber.cs" />
     <Compile Include="T_DemoTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

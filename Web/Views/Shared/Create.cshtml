@@ -58,30 +58,30 @@
 }
 @model TDemoTable
 
-    <h2>添加/编辑 @Model.GetType().Name</h2>
-    <form class="form-horizontal">
-        @foreach (var p in properties)
-        {
-            var proValue = p.GetValue(Model, null);
-            <div class="form-group">
-                <label for="@p.Name" class="col-sm-2 control-label">
-                    <span>@p.Name</span>
-                </label>
-                <div class="col-sm-10">
-                    @if (p.PropertyType == typeof(bool) || p.PropertyType == typeof(bool?))
-                    {
-                        @Html.CheckBox(p.Name, proValue);
-                    }
-                    else
-                    {
-                        <input data-type="@getDataType(p.PropertyType)" type="@getInputType(p.PropertyType)" name="@p.Name" class="form-control" placeholder="@GetModeTypeName(p.PropertyType)" value="@proValue">
-                    }
-                </div>
-            </div>
-        }
+<h2>添加/编辑 @ViewContext.RouteData.Values["controller"] @Model.GetType().Name</h2>
+<form class="form-horizontal">
+    @foreach (var p in properties)
+    {
+        var proValue = p.GetValue(Model, null);
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-success" onclick="save()"><i class="glyphicon glyphicon-floppy-disk"></i> 保存</button>
+            <label for="@p.Name" class="col-sm-2 control-label">
+                <span>@p.Name</span>
+            </label>
+            <div class="col-sm-10">
+                @if (p.PropertyType == typeof(bool) || p.PropertyType == typeof(bool?))
+                {
+                    @Html.CheckBox(p.Name, proValue);
+                }
+                else
+                {
+                    <input data-type="@getDataType(p.PropertyType)" type="@getInputType(p.PropertyType)" name="@p.Name" class="form-control" placeholder="@GetModeTypeName(p.PropertyType)" value="@proValue">
+                }
             </div>
         </div>
-    </form>
+    }
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-success" onclick="save()"><i class="glyphicon glyphicon-floppy-disk"></i> 保存</button>
+        </div>
+    </div>
+</form>

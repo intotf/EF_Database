@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Command
+namespace Model
 {
-    public class Class1
+    public interface ISyncData
     {
+        string F_Guid { get; set; }
     }
 }

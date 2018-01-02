@@ -1,6 +1,6 @@
 ﻿namespace WinForm
 {
-    partial class Form1
+    partial class Mssql
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -63,7 +63,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 29);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(518, 265);
+            this.dataGridView1.Size = new System.Drawing.Size(706, 308);
             this.dataGridView1.TabIndex = 2;
             // 
             // menuStrip1
@@ -73,7 +73,7 @@
             this.DeleteToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(518, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(706, 29);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -93,17 +93,17 @@
             this.DeleteToolStripMenuItem.Text = "删除";
             this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
-            // Form1
+            // Mssql
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(518, 294);
+            this.ClientSize = new System.Drawing.Size(706, 337);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btAdd);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Mssql";
+            this.Text = "SqlServer 实例";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

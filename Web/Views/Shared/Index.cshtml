@@ -17,11 +17,9 @@
     </script>
 }
 
-@model List<TDemoTable>
+@model PageInfo<TDemoTable>
 
-
-
-<h2>列表</h2>
+<h2>@ViewContext.RouteData.Values["controller"] 列表</h2>
 
 <form class="form-inline">
     <div class="form-group">
@@ -31,30 +29,32 @@
     <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> 搜索</button>
     <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create")'"><i class="glyphicon glyphicon-saved"></i> 新增</button>
 </form>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            @foreach (var p in properties)
-            {
-                <th>@p.Name</th>
-            }
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in this.Model)
-        {
+<div class="page-container">
+    <table class="table table-bordered">
+        <thead>
             <tr>
                 @foreach (var p in properties)
                 {
-                    <td>@p.GetValue(item)</td>
+                    <th>@p.Name</th>
                 }
-                <td style="width:80px;">
-                    @Html.ActionLink("编辑", "Edit", new { id = item.Id })
-                    <a href="javascript:void(0)" onclick="remove(@item.Id)">删除</a>
-                </td>
+                <th>操作</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in this.Model)
+            {
+                <tr>
+                    @foreach (var p in properties)
+                    {
+                        <td>@p.GetValue(item)</td>
+                    }
+                    <td style="width:80px;">
+                        @Html.ActionLink("编辑", "Edit", new { id = item.Id })
+                        <a href="javascript:void(0)" onclick="remove(@item.Id)">删除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PageControl()
+</div>

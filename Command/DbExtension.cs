@@ -7,12 +7,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlServer
+namespace Command
 {
-    /// <summary>
-    /// 扩展
-    /// </summary>
-    public static partial class Extension
+    public static partial class DbExtension
     {
         /// <summary>
         /// 条件删除
@@ -27,6 +24,13 @@ namespace SqlServer
             return dbSet.RemoveRange(items);
         }
 
+        /// <summary>
+        /// 根据自增型 ID 删除
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dbSet">数据库上下文对象</param>
+        /// <param name="id">自增ID</param>
+        /// <returns></returns>
         public static async Task<T> RemoveById<T>(this DbSet<T> dbSet, int id) where T : class,IAutoId
         {
             var model = await dbSet.FindAsync(id);

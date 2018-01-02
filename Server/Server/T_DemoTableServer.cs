@@ -12,7 +12,7 @@ namespace SqlServer.Server
     /// <summary>
     /// 执行Sql 语句
     /// </summary>
-    public class T_DemoTableServer : SqlServerBase
+    public class T_DemoTableServer : SqlServerBase<SqlDb>
     {
         /// <summary>
         /// 指定Sql 语句

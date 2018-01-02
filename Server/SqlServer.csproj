@@ -52,10 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
-    <Compile Include="Extension.cs" />
+    <Content Include="RedisCache.cs" />
     <Compile Include="Server\T_DemoTableServer.cs" />
     <Compile Include="SqlDb.cs" />
-    <Compile Include="PageInfoExtend.cs" />
     <Compile Include="ServerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlDbTwo.cs" />

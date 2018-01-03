@@ -141,7 +141,7 @@ namespace Web.Controllers
         /// <returns></returns>
         public async Task<JsonResult> Remove(string id, string userId)
         {
-            var state = await PubSubRedis.Instance.RemoveRedisAsync(userId, id);
+            var state = await PubSubRedis.Instance.RemoveRedisAsync(userId, true, id);
 
             return Json(new { state = state > 0, value = "删除成功" });
         }

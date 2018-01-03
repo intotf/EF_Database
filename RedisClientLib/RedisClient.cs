@@ -160,8 +160,9 @@ namespace RedisClientLib
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <param name="TDemoTable">保实实体</param>
+        /// <param name="notify">是否扒</param>
         /// <returns></returns>
-        public async Task<bool> UpdateOrAddRedisAsync(string userId, TDemoTable model)
+        public async Task<bool> UpdateOrAddRedisAsync(string userId, TDemoTable model, bool notify = true)
         {
 
             model.F_Guid = string.IsNullOrEmpty(model.F_Guid) ? Guid.NewGuid().ToString() : model.F_Guid;
@@ -174,6 +175,10 @@ namespace RedisClientLib
                 Data = model
             };
             await this.AddToRedisAsync(new[] { userId }, new[] { data });
+            if (notify)
+            {
+                await this.TryNotify(new[] { userId });
+            }
             return true;
         }
 
@@ -182,8 +187,9 @@ namespace RedisClientLib
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <param name="changeId">要删除的增量数据的id</param>
+        /// <param name="notify">是否推送</param>
         /// <returns>实际删除的条数</returns>
-        public async Task<int> RemoveRedisAsync(string userId, params string[] changeId)
+        public async Task<int> RemoveRedisAsync(string userId, bool notify = true, params string[] changeId)
         {
             if (changeId == null || changeId.Length == 0)
             {
@@ -193,7 +199,12 @@ namespace RedisClientLib
             var key = this.MergeKey(userId);
             var db = this.GetDatabase();
             var fields = changeId.Select(id => (RedisValue)id).ToArray();
-            return (int)await db.HashDeleteAsync(key, fields);
+            var count = (int)await db.HashDeleteAsync(key, fields);
+            if (notify)
+            {
+                await this.TryNotify(new[] { userId });
+            }
+            return count;
         }
 
         /// <summary>
@@ -282,7 +293,6 @@ namespace RedisClientLib
         {
             return this.GetSubscriber();
         }
-
 
         /// <summary>
         /// 发布增量数据和通知

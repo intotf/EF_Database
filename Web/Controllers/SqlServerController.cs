@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Infrastructure;
 using Command;
+using SqlServer.Server;
 
 namespace Web.Controllers
 {
@@ -55,13 +56,16 @@ namespace Web.Controllers
         {
             model.F_Guid = Guid.NewGuid().ToString();
             model.CreateTime = DateTime.Now;
-            using (var db = new SqlDb())
-            {
-                db.TDemoTable.Add(model);
-                await db.SaveChangesAsync();
+            SqlDb.inter.Add(model);
+            await SqlDb.inter.SaveChangesAsync();
+            return Json(new { state = true, value = "操作成功" });
+            ////using (var db = new SqlDb())
+            ////{
+            ////    db.TDemoTable.Add(model);
+            ////    await db.SaveChangesAsync();
 
-                return Json(new { state = true, value = "操作成功" });
-            }
+            ////    return Json(new { state = true, value = "操作成功" });
+            ////}
         }
 
         /// <summary>

@@ -28,6 +28,24 @@ namespace SqlServer
         {
         }
 
+        public static SqlDb inter = new SqlDb();
+
+
+        public T Add<T>(T model) where T : class
+        {
+            var entry = this.Entry(model);
+            if (entry.State == EntityState.Detached)
+            {
+                model = this.Set<T>().Add(model);
+            }
+            return model;
+        }
+
+      
+        public static SqlDb db()
+        {
+            return new SqlDb();
+        }
 
         /// <summary>
         /// 更新
@@ -78,6 +96,17 @@ namespace SqlServer
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
+        }
+
+        /// <summary>
+        /// 保存完后自动释放
+        /// </summary>
+        /// <returns></returns>
+        public override async Task<int> SaveChangesAsync()
+        {
+            var state = await base.SaveChangesAsync();
+            this.Dispose(true);
+            return state;
         }
     }
 }

@@ -42,10 +42,10 @@ namespace RedisServer
         /// </summary>
         /// <param name="value">用户数据</param>
         /// <returns></returns>
-        public string NewToken(T value)
+        public async Task<string> NewTokenAsync(T value)
         {
             var token = this.GenerateToken();
-            return this.NewToken(token, value);
+            return await this.NewTokenAsync(token, value);
         }
 
 
@@ -55,10 +55,10 @@ namespace RedisServer
         /// <param name="token">token值</param>
         /// <param name="value">用户数据</param>
         /// <returns></returns>
-        public string NewToken(string token, T value)
+        public async Task<string> NewTokenAsync(string token, T value)
         {
             var key = this.MergeKey(token);
-            if (this.GetDatabase().StringSet(key, value.ToRedisValue(), this.Expire))
+            if (await this.GetDatabase().StringSetAsync(key, value.ToRedisValue(), this.Expire))
             {
                 return token;
             }
@@ -71,7 +71,7 @@ namespace RedisServer
         /// </summary>
         /// <param name="token">token</param>
         /// <returns></returns>
-        public T GetValue(string token)
+        public async Task<T> GetValueAsync(string token)
         {
             if (string.IsNullOrEmpty(token) == true)
             {
@@ -83,9 +83,9 @@ namespace RedisServer
 
             if (this.Expire.HasValue)
             {
-                db.KeyExpire(key, this.Expire, CommandFlags.FireAndForget);
+                await db.KeyExpireAsync(key, this.Expire, CommandFlags.FireAndForget);
             }
-            return db.StringGet(key).ToModel<T>();
+            return (await db.StringGetAsync(key)).ToModel<T>();
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace RedisServer
         /// </summary>
         /// <param name="token">token</param>
         /// <returns></returns>
-        public T GetValueNoExpire(string token)
+        public async Task<T> GetValueNoExpireAsync(string token)
         {
             if (string.IsNullOrEmpty(token) == true)
             {
@@ -104,7 +104,7 @@ namespace RedisServer
             var key = this.MergeKey(token);
             var db = this.GetDatabase();
 
-            return db.StringGet(key).ToModel<T>();
+            return (await db.StringGetAsync(key)).ToModel<T>();
         }
 
         /// <summary>
@@ -114,14 +114,14 @@ namespace RedisServer
         /// <typeparam name="TValue"></typeparam>
         /// <param name="token">键</param>
         /// <param name="value">值</param>
-        public bool SetValue(string token, T value)
+        public async Task<bool> SetValueAsync(string token, T value)
         {
             if (string.IsNullOrEmpty(token) == true)
             {
                 return false;
             }
             var key = this.MergeKey(token);
-            return this.GetDatabase().StringSet(key, value.ToRedisValue(), this.Expire);
+            return await this.GetDatabase().StringSetAsync(key, value.ToRedisValue(), this.Expire);
         }
 
         /// <summary>
@@ -129,14 +129,14 @@ namespace RedisServer
         /// </summary>
         /// <param name="token">token</param>
         /// <returns></returns>
-        public bool RemoveToken(string token)
+        public async Task<bool> RemoveTokenAsync(string token)
         {
             if (string.IsNullOrEmpty(token) == true)
             {
                 return false;
             }
             var key = this.MergeKey(token);
-            return this.GetDatabase().KeyDelete(key);
+            return await this.GetDatabase().KeyDeleteAsync(key);
         }
     }
 }

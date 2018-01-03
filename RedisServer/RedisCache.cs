@@ -27,10 +27,10 @@ namespace RedisServer
         /// </summary>
         /// <param name="key">键</param>
         /// <returns></returns>
-        public string Get(string key)
+        public async Task<string> GetAsync(string key)
         {
             key = this.MergeKey(key);
-            return this.GetDatabase().StringGet(key);
+            return await this.GetDatabase().StringGetAsync(key);
         }
 
         /// <summary>
@@ -38,10 +38,10 @@ namespace RedisServer
         /// </summary>
         /// <param name="key">键</param>
         /// <returns></returns>
-        public T Get<T>(string key) where T : class
+        public async Task<T> GetAsync<T>(string key) where T : class
         {
             key = this.MergeKey(key);
-            return this.GetDatabase().StringGet(key).ToModel<T>();
+            return (await this.GetDatabase().StringGetAsync(key)).ToModel<T>();
         }
 
         /// <summary>
@@ -50,23 +50,10 @@ namespace RedisServer
         /// <param name="key">键</param>
         /// <param name="value">值</param>
         /// <param name="expire">过期时间</param>
-        public bool Set(string key, string value, TimeSpan? expire)
+        public async Task<bool> SetAsync(string key, string value, TimeSpan? expire)
         {
             key = this.MergeKey(key);
-            return this.GetDatabase().StringSet(key, value, expire);
-        }
-
-        /// <summary>
-        /// 设置缓存
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key">键</param>
-        /// <param name="value">值</param>
-        /// <param name="expire">过期时间</param>
-        public bool SetIfNotExists(string key, string value, TimeSpan? expire)
-        {
-            key = this.MergeKey(key);
-            return this.GetDatabase().StringSet(key, value, expire, StackExchange.Redis.When.NotExists);
+            return await this.GetDatabase().StringSetAsync(key, value, expire);
         }
 
         /// <summary>
@@ -76,10 +63,23 @@ namespace RedisServer
         /// <param name="key">键</param>
         /// <param name="value">值</param>
         /// <param name="expire">过期时间</param>
-        public bool Set<T>(string key, T value, TimeSpan? expire) where T : class
+        public async Task<bool> SetIfNotExistsAsync(string key, string value, TimeSpan? expire)
         {
             key = this.MergeKey(key);
-            return this.GetDatabase().StringSet(key, value.ToRedisValue(), expire);
+            return await this.GetDatabase().StringSetAsync(key, value, expire, StackExchange.Redis.When.NotExists);
+        }
+
+        /// <summary>
+        /// 设置缓存
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <param name="expire">过期时间</param>
+        public async Task<bool> SetAsync<T>(string key, T value, TimeSpan? expire) where T : class
+        {
+            key = this.MergeKey(key);
+            return await this.GetDatabase().StringSetAsync(key, value.ToRedisValue(), expire);
         }
 
 
@@ -90,10 +90,10 @@ namespace RedisServer
         /// <param name="key">键</param>
         /// <param name="value">值</param>
         /// <param name="expire">过期时间</param>
-        public bool SetIfNotExists<T>(string key, T value, TimeSpan? expire) where T : class
+        public async Task<bool> SetIfNotExistsAsync<T>(string key, T value, TimeSpan? expire) where T : class
         {
             key = this.MergeKey(key);
-            return this.GetDatabase().StringSet(key, value.ToRedisValue(), expire, StackExchange.Redis.When.NotExists);
+            return await this.GetDatabase().StringSetAsync(key, value.ToRedisValue(), expire, StackExchange.Redis.When.NotExists);
         }
     }
 }

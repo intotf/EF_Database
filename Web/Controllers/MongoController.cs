@@ -29,7 +29,6 @@ namespace Web.Controllers
             }
             var data = await db.TDemoTable().ToPageAsync(where, page, pageSize);
             return View(data);
-
         }
 
 

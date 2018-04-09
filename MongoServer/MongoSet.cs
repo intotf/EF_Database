@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using System.Reflection;
+using Infrastructure.Reflection;
 
 namespace MongoServer
 {
@@ -124,68 +125,102 @@ namespace MongoServer
         /// <param name="where">条件</param>
         /// <param name="updater">更新</param>
         /// <returns></returns>
-        public int Update(Expression<Func<T, bool>> where, UpdateDefinition<T> updater)
+        private async Task<int> UpdateAsync(Expression<Func<T, bool>> where, UpdateDefinition<T> updater)
         {
-            return (int)this.collection.UpdateMany(where, updater).ModifiedCount;
+            var result = await this.collection.UpdateOneAsync(where, updater);
+            return (int)result.ModifiedCount;
         }
 
         /// <summary>
-        /// 条件更新
+        /// 更新条件更新
         /// </summary>
         /// <param name="where">条件</param>
         /// <param name="updater">更新</param>
         /// <returns></returns>
-        public async Task<int> UpdateAsync(Expression<Func<T, bool>> where, UpdateDefinition<T> updater)
+        private async Task<int> UpdateManyAsync(Expression<Func<T, bool>> where, UpdateDefinition<T> updater)
         {
             var result = await this.collection.UpdateManyAsync(where, updater);
             return (int)result.ModifiedCount;
         }
 
+
+        /// <summary>
+        /// 更新指定字段
+        /// 将表达式转换为UpdateDefinitionBuilder
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="updater"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <returns></returns>
+        private static UpdateDefinition<T> GetUpdateDefinition<T>(Expression<Func<T>> updater)
+        {
+            if (updater == null)
+            {
+                throw new ArgumentNullException("updater");
+            }
+
+            var initExpression = updater.Body as MemberInitExpression;
+            if (initExpression == null)
+            {
+                throw new ArgumentException("updater必须为MemberInitExpression");
+            }
+
+            var definitions = new List<UpdateDefinition<T>>();
+            foreach (var item in initExpression.Bindings)
+            {
+                var assignment = item as MemberAssignment;
+                if (assignment == null)
+                {
+                    continue;
+                }
+
+                var value = Expression.Lambda(assignment.Expression).Compile().DynamicInvoke();
+                var definition = Builders<T>.Update.Set(assignment.Member.Name, value);
+                definitions.Add(definition);
+            }
+            return Builders<T>.Update.Combine(definitions);
+        }
+
         /// <summary>
         /// 更新单个实体 
-        /// Author : aXinNo1
-        /// CreateTime: 2017-12-07
         /// </summary>
         /// <param name="where">更新条件</param>
         /// <param name="input">数据源</param>
-        /// <param name="containFields">为空就是更新所有,不为空就是更新指定的字段</param>
         /// <returns></returns>
-        public async Task<int> UpdateOneAsync(Expression<Func<T, bool>> where, T input, Expression<Func<T, object>> containFields)
+        public async Task<int> UpdateOneAsync(Expression<Func<T, bool>> where, T input)
         {
             ///修改的属性集合
             var fieldList = new List<UpdateDefinition<T>>();
-            var result = 0;
-            if (input == null)
-                throw new NullReferenceException();
-            var containFieldsMember = containFields == null ? Enumerable.Empty<MemberInfo>() : (containFields.Body as NewExpression).Members;
-            var Ctype = input.GetType();
-
-            foreach (var item in Ctype.GetProperties())
+            foreach (var item in typeof(T).GetProperties())
             {
-                if (item.Name.ToLower() != "id")
+                var replaceValue = item.GetValue(input);
+                if (replaceValue != null)
                 {
-                    if (containFields == null || containFieldsMember.Any(o => o.Name == item.Name))
-                    {
-                        var replaceValue = item.GetValue(input);
-                        if (replaceValue != null)
-                        {
-                            fieldList.Add(Builders<T>.Update.Set(item.Name, replaceValue));
-                        }
-                    }
+                    fieldList.Add(Builders<T>.Update.Set(item.Name, replaceValue));
                 }
             }
-            #region 有可修改的属性
+
             if (fieldList.Count > 0)
             {
                 var builders = Builders<T>.Update.Combine(fieldList);
-                ///执行提交修改
-                var m = await this.collection.UpdateOneAsync(where, builders);
-                result = (int)m.ModifiedCount;
+                return await this.UpdateAsync(where, builders);
             }
-            return result;
-            #endregion
+            return 0;
         }
 
+        /// <summary>
+        /// 更新单个实体指定字段
+        /// CreateTime: 2017-12-07
+        /// </summary>
+        /// <param name="where">更新条件</param>
+        /// <param name="updater">更新指定的字段</param>
+        /// <returns></returns>
+        public async Task<int> UpdateOneAsync(Expression<Func<T, bool>> where, Expression<Func<T>> updater)
+        {
+            var definition = GetUpdateDefinition<T>(updater);
+            return await this.UpdateAsync(where, definition);
+        }
 
         /// <summary>
         /// 条件删除

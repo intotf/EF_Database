@@ -32,6 +32,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D9FFF2
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQServer", "RabbitMQServer\RabbitMQServer.csproj", "{52C3DFEF-1578-4CF6-9800-49CC6154F964}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F1A42793-A910-4DB9-BA7D-A4319BD0169D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQTest", "Test\RabbitMQTest\RabbitMQTest.csproj", "{1E6ECC57-D329-4CCF-8476-8F0BEC87B564}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitConsumers", "Test\RabbitConsumers\RabbitConsumers.csproj", "{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaServer", "KafkaServer\KafkaServer.csproj", "{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,8 +142,36 @@ Global
 		{542CC2F5-293B-418A-B213-71426416EC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{542CC2F5-293B-418A-B213-71426416EC7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{542CC2F5-293B-418A-B213-71426416EC7E}.Release|x86.ActiveCfg = Release|Any CPU
+		{52C3DFEF-1578-4CF6-9800-49CC6154F964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52C3DFEF-1578-4CF6-9800-49CC6154F964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52C3DFEF-1578-4CF6-9800-49CC6154F964}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{52C3DFEF-1578-4CF6-9800-49CC6154F964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52C3DFEF-1578-4CF6-9800-49CC6154F964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52C3DFEF-1578-4CF6-9800-49CC6154F964}.Release|x86.ActiveCfg = Release|Any CPU
+		{1E6ECC57-D329-4CCF-8476-8F0BEC87B564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E6ECC57-D329-4CCF-8476-8F0BEC87B564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E6ECC57-D329-4CCF-8476-8F0BEC87B564}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1E6ECC57-D329-4CCF-8476-8F0BEC87B564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E6ECC57-D329-4CCF-8476-8F0BEC87B564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E6ECC57-D329-4CCF-8476-8F0BEC87B564}.Release|x86.ActiveCfg = Release|Any CPU
+		{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB}.Release|x86.ActiveCfg = Release|Any CPU
+		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E6ECC57-D329-4CCF-8476-8F0BEC87B564} = {F1A42793-A910-4DB9-BA7D-A4319BD0169D}
+		{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB} = {F1A42793-A910-4DB9-BA7D-A4319BD0169D}
 	EndGlobalSection
 EndGlobal

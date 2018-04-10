@@ -14,3 +14,16 @@
 /Command/bin
 /Web/obj
 /Web/bin
+/MysqlServer/bin
+/MysqlServer/obj
+/packages
+/WebAccess/obj
+/WebAccess/bin
+/RedisClientLib/obj
+/RedisClientLib/bin
+/Test/RabbitMQTest/obj
+/Test/RabbitMQTest/bin
+/Test/RabbitConsumers/obj
+/Test/RabbitConsumers/bin
+/RabbitMQServer/obj
+/RabbitMQServer/bin

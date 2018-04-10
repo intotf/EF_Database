@@ -27,3 +27,5 @@
 /Test/RabbitConsumers/bin
 /RabbitMQServer/obj
 /RabbitMQServer/bin
+/KafkaServer/obj
+/KafkaServer/bin

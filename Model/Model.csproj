@@ -75,6 +75,7 @@
     <Compile Include="IStringId.cs" />
     <Compile Include="ISubscribers.cs" />
     <Compile Include="ISyncData.cs" />
+    <Compile Include="NpgSqlTable.cs" />
     <Compile Include="RedisSyncData.cs" />
     <Compile Include="RedisSubscriber.cs" />
     <Compile Include="SqlLiteModel.cs" />

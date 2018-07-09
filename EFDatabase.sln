@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MysqlServer", "MysqlServer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClientLib", "RedisClientLib\RedisClientLib.csproj", "{BFA01B84-CFAA-4277-A24D-71A9805FB883}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessServer", "AccessServer\AccessServer.csproj", "{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAccess", "WebAccess\WebAccess.csproj", "{2CA16338-6959-4217-AD23-494860D9AA0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLiteServer", "SqlLiteServer\SqlLiteServer.csproj", "{542CC2F5-293B-418A-B213-71426416EC7E}"
@@ -41,6 +39,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitConsumers", "Test\RabbitConsumers\RabbitConsumers.csproj", "{ACFBC2C5-44D7-4DF1-92F7-4A5E2B2AF8EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaServer", "KafkaServer\KafkaServer.csproj", "{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreSqlServer", "PostgreSqlServer\PostgreSqlServer.csproj", "{D7B602B4-8128-436A-B42A-9D2728F286FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,14 +120,6 @@ Global
 		{BFA01B84-CFAA-4277-A24D-71A9805FB883}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFA01B84-CFAA-4277-A24D-71A9805FB883}.Release|x86.ActiveCfg = Release|x86
 		{BFA01B84-CFAA-4277-A24D-71A9805FB883}.Release|x86.Build.0 = Release|x86
-		{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}.Debug|x86.ActiveCfg = Debug|x86
-		{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}.Debug|x86.Build.0 = Debug|x86
-		{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}.Release|x86.ActiveCfg = Release|x86
-		{3165235B-89E0-4D39-9E8B-F2A11A2DCF12}.Release|x86.Build.0 = Release|x86
 		{2CA16338-6959-4217-AD23-494860D9AA0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2CA16338-6959-4217-AD23-494860D9AA0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CA16338-6959-4217-AD23-494860D9AA0D}.Debug|x86.ActiveCfg = Debug|x86
@@ -166,6 +158,12 @@ Global
 		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AA3F9FA2-1DE8-42B8-AD46-A94F5FBF147B}.Release|x86.ActiveCfg = Release|Any CPU
+		{D7B602B4-8128-436A-B42A-9D2728F286FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7B602B4-8128-436A-B42A-9D2728F286FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7B602B4-8128-436A-B42A-9D2728F286FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D7B602B4-8128-436A-B42A-9D2728F286FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7B602B4-8128-436A-B42A-9D2728F286FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7B602B4-8128-436A-B42A-9D2728F286FB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -65,9 +65,27 @@
       <HintPath>..\packages\MongoDB.Driver.Core.2.5.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.7\lib\net45\Mono.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\net_packages\net_packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.7\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql.EntityFramework, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.EntityFramework.2.2.7\lib\net45\Npgsql.EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis">
       <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
@@ -182,6 +200,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MongoController.cs" />
     <Compile Include="Controllers\MysqlController.cs" />
+    <Compile Include="Controllers\PostgreSqlController.cs" />
     <Compile Include="Controllers\RedisController.cs" />
     <Compile Include="Controllers\SqlLiteController.cs" />
     <Compile Include="Controllers\SqlServerController.cs" />
@@ -260,6 +279,7 @@
     <Content Include="Views\Redis\Create.cshtml" />
     <Content Include="Views\SqlLite\Index.cshtml" />
     <Content Include="Views\SqlLite\Create.cshtml" />
+    <Content Include="Views\PostgreSql\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Mongo\" />
@@ -289,6 +309,10 @@
     <ProjectReference Include="..\MysqlServer\MysqlServer.csproj">
       <Project>{434e3a00-0f16-4ab1-89fe-27ce6c709333}</Project>
       <Name>MysqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PostgreSqlServer\PostgreSqlServer.csproj">
+      <Project>{d7b602b4-8128-436a-b42a-9d2728f286fb}</Project>
+      <Name>PostgreSqlServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\RedisClientLib\RedisClientLib.csproj">
       <Project>{bfa01b84-cfaa-4277-a24d-71a9805fb883}</Project>

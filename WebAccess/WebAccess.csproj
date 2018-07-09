@@ -204,10 +204,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccessServer\AccessServer.csproj">
-      <Project>{3165235b-89e0-4d39-9e8b-f2a11a2dcf12}</Project>
-      <Name>AccessServer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{daf16140-f585-48fb-87b1-f527df0c5d98}</Project>
       <Name>Model</Name>

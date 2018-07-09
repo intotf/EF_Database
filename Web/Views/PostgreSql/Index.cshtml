@@ -1,0 +1,98 @@
+﻿@{
+    var properties = typeof(NpgSqlTable).GetProperties();
+}
+
+@section scripts{
+    <script>
+        function remove(id) {
+            $.post('@Url.Action("Remove")', { id: id }, function (data) {
+                if (data.state) {
+                    alert(data.value);
+                    window.location.reload();
+                } else {
+                    alert(data.value);
+                }
+            })
+        }
+
+        function CreateRange(count) {
+            $.post('@Url.Action("CreateRange")', { Count: count }, function (data) {
+                if (data.state) {
+                    alert(data.value);
+                    window.location.reload();
+                } else {
+                    alert(data.value);
+                }
+            })
+        }
+
+        function RemoveAll() {
+            $.post('@Url.Action("RemoveAll")', null, function (data) {
+                if (data.state) {
+                    alert(data.value);
+                    window.location.reload();
+                } else {
+                    alert(data.value);
+                }
+            })
+        }
+
+        function EditMany() {
+            $.post('@Url.Action("EditMany")', null, function (data) {
+                if (data.state) {
+                    alert(data.value);
+                    window.location.reload();
+                } else {
+                    alert(data.value);
+                }
+            })
+        }
+    </script>
+}
+
+@model List<NpgSqlTable>
+
+<h2>@ViewContext.RouteData.Values["controller"] 列表</h2>
+
+<form class="form-inline">
+    <div class="form-group">
+        <label for="F_String">String</label>
+        <input type="text" class="form-control" name="F_String" id="F_String" placeholder="F_String">
+    </div>
+    <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> 搜索</button>
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create")'"><i class="glyphicon glyphicon-saved"></i> 新增</button>
+    @if (ViewContext.RouteData.Values["controller"].ToString().Equals("Mongo", StringComparison.OrdinalIgnoreCase))
+    {
+        <button type="button" class="btn btn-default" onclick="CreateRange(10)"><i class="glyphicon glyphicon-saved"></i> 批量新增</button>
+        <button type="button" class="btn btn-default" onclick="RemoveAll()"><i class="glyphicon glyphicon-remove"></i> 清空数据库</button>
+        <button type="button" class="btn btn-default" onclick="EditMany()"><i class="glyphicon glyphicon-remove"></i> 批量编辑</button>
+    }
+</form>
+<div class="page-container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                @foreach (var p in properties)
+                {
+                    <th>@p.Name</th>
+                }
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in this.Model)
+            {
+                <tr>
+                    @foreach (var p in properties)
+                    {
+                        <td>@p.GetValue(item)</td>
+                    }
+                    <td style="width:80px;">
+                        @Html.ActionLink("编辑", "Edit", new { id = item.Id })
+                        <a href="javascript:void(0)" onclick="remove(@item.Id)">删除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
